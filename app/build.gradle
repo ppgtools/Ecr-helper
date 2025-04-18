@@ -1,0 +1,59 @@
+plugins {
+    alias(libs.plugins.android.application)
+    id 'dagger.hilt.android.plugin'
+}
+
+android {
+    namespace 'com.ecr.helper.tool'
+    compileSdk rootProject.compileSdkVersion
+
+    defaultConfig {
+        minSdk rootProject.minSdkVersion
+        targetSdk rootProject.targetSdkVersion
+        versionCode 3
+        versionName "1.5"
+
+        applicationId "com.ecr.helper.tool"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildFeatures {
+        buildConfig true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules-debug.pro'
+
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+
+    implementation libs.appcompat
+    implementation libs.material
+    implementation libs.activity
+    implementation libs.constraintlayout
+    implementation libs.hilt.android
+    implementation libs.androidx.appcompat
+    annotationProcessor libs.hilt.compiler
+    implementation 'org.nanohttpd:nanohttpd:2.3.1'
+
+    api project(':Common:Base')
+    api project(':Common:App_Constants_Config_Info')
+    api project(':Modular:Module_CallRecorder')
+
+    testImplementation libs.junit
+    androidTestImplementation libs.ext.junit
+    androidTestImplementation libs.espresso.core
+}
